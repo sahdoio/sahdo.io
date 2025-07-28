@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useArticles } from '@/composables/useArticles'
+import {ref, onMounted} from 'vue'
+import {useArticles} from '@/composables/useArticles'
+import {useYoutubeVideos} from '@/composables/useYoutubeVideos'
 
 const articles = ref(useArticles())
+const videos = ref([])
 
+onMounted(async () => {
+  videos.value = await useYoutubeVideos()
+})
 </script>
 
 <template>
-  <div class="min-h-screen bg-black text-white font-sans flex flex-col items-center px-4 py-10">
+  <div class="min-h-screen bg-black text-white font-sans flex flex-col items-center px-6 sm:px-10 py-10">
     <!-- Avatar + Header -->
     <img
       src="/avatar.png"
@@ -16,42 +21,32 @@ const articles = ref(useArticles())
     />
 
     <h1 class="text-center text-2xl md:text-4xl font-bold leading-tight">
-      The efficiency of one, the talent of three.<br />
-      <span class="text-gray-400">Why look elsewhere?</span>
+      Software Engineer and Architect
     </h1>
 
-    <!-- Description -->
-    <p class="text-center max-w-xl mt-4 text-gray-300">
-      Developer, art director and photographer, I fuse technicality and aestheticism
-      to bring a unique dimension to my work. Passionate about beauty, I give life
-      to projects that captivate and convert.
+    <p class="text-center max-w-2xl mt-4 text-gray-300 leading-relaxed">
+      With over a decade of experience in backend development and system architecture, I help companies design scalable solutions using <span class="font-medium text-white">PHP</span>, <span class="font-medium text-white">Node.js</span>, and modern <span class="font-medium text-white">JavaScript</span> frameworks like <span class="font-medium text-white">Vue</span> and <span class="font-medium text-white">Nuxt</span>.
+      I’m also the founder of
+      <a href="https://hintify.io" class="underline hover:text-white font-medium">Hintify</a>
+      and a passionate tech educator at
+      <a href="https://www.youtube.com/@sahdoio" class="underline hover:text-white font-medium">Sahdo.io</a>.
     </p>
 
-    <!-- Availability -->
     <div class="mt-3 text-green-400 bg-green-900/20 rounded-full px-4 py-1 text-sm">
-      • Available for new opportunities
+      • Available for freelance, consulting & collaboration
     </div>
 
-    <!-- Social Icons Placeholder -->
     <div class="flex gap-4 mt-6 text-gray-400">
-      <a href="#">GitHub</a>
-      <a href="#">X</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Instagram</a>
-      <a href="#">Spotify</a>
+      <a href="https://github.com/sahdoio" target="_blank">GitHub</a>
+      <a href="https://x.com/lucassahdo" target="_blank">X</a>
+      <a href="https://www.linkedin.com/in/lucassahdo/" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/sahdoio" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@lucassahdo" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@sahdoio" target="_blank">YouTube</a>
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="flex gap-4 mt-6">
-      <button class="bg-white text-black px-4 py-2 rounded">Let's work together</button>
-      <button class="bg-white text-black px-4 py-2 rounded">Schedule a meeting</button>
-    </div>
-
-    <!-- Deploy Button -->
-    <button class="mt-6 bg-gray-700 px-3 py-1 rounded text-sm">Deploy</button>
-
-    <!-- Articles List -->
-    <div class="w-full max-w-2xl mt-12">
+    <div class="w-full max-w-6xl mt-12">
+      <!-- Articles -->
       <h2 class="text-lg italic text-gray-300 mb-4">Articles</h2>
       <ul>
         <li
@@ -72,6 +67,33 @@ const articles = ref(useArticles())
       <NuxtLink to="/articles" class="mt-2 text-sm italic text-gray-400 hover:underline block">
         See more
       </NuxtLink>
+
+      <!-- Youtube -->
+      <div class="w-full mt-20">
+        <h2 class="text-lg italic text-gray-300 mb-4">Latest Videos</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="(video, index) in videos"
+            :key="index"
+            class="bg-gray-900 border border-gray-700 rounded-lg shadow-[0_0_0_1px_#1f2937] overflow-hidden flex flex-col"
+          >
+          <img :src="video.thumbnail" :alt="video.title" class="w-full h-48 object-cover"/>
+            <div class="p-4 flex flex-col justify-between flex-1">
+              <h3 class="text-white font-semibold text-lg mb-2">{{ video.title }}</h3>
+              <div class="text-sm text-gray-400 mb-4">{{ video.pubDate }}</div>
+              <a
+                :href="video.url"
+                target="_blank"
+                class="mt-auto bg-gray-700 text-white px-4 py-2 rounded text-center"
+              >
+                Watch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
+
