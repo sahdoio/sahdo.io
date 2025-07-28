@@ -4,23 +4,23 @@ export function useArticles() {
       title: 'The Rise of Clean Architecture in PHP',
       date: '2024',
       slug: 'clean-architecture-php',
-      cover: '/articles/clean-architecture-cover.jpg',
+      cover: '/articles/clean-architecture-php.png',
       content: `
-        <h2>What is Clean Architecture?</h2>
-        <p>Clean architecture separates concerns and creates maintainable systems...</p>
-    
-        <div class="border-l-4 border-yellow-400 bg-yellow-900/30 p-4 rounded-md my-6">
-          <strong>💡 Note:</strong> Always decouple your business rules from frameworks.
-        </div>
-    
-        <pre><code class="language-php">
-        class UseCase {
-          public function execute(Request $request): Response {
-            return $this->service->run($request);
+          <h2>What is Clean Architecture?</h2>
+          <p>Clean architecture separates concerns and creates maintainable systems...</p>
+  
+          <div class="border-l-4 border-yellow-400 bg-yellow-900/30 p-4 rounded-md my-6">
+            <strong>💡 Note:</strong> Always decouple your business rules from frameworks.
+          </div>
+  
+          <pre class="my-6"><code class="language-typescript">
+          class UseCase {
+            public function execute(Request $request): Response {
+              return $this->service->run($request);
+            }
           }
-        }
-        </code></pre>
-      `
+          </code></pre>
+        `
     },
     {
       slug: 'nuxt-ssr-future',
