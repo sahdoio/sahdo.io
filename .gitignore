@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+.npm/
+.pnpm/
+.yarn/
+
+# build output
+dist/
+.nuxt/
+.output/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.*.local
+
+# editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macos
+.DS_Store
+
+# local dev stuff
+*.local
+*.log
+
+# vercel/netlify/etc
+.vercel/
+.netlify/
