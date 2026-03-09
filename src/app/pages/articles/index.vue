@@ -1,39 +1,41 @@
 <script setup lang="ts">
 import { useArticles } from '@/composables/useArticles'
+import { useI18n } from '@/composables/useI18n'
 
-const articles = useArticles()
+const { t } = useI18n()
+const { data: articles } = await useArticles()
 </script>
 
 <template>
-  <div class="min-h-screen bg-black text-white px-6 py-12 max-w-4xl mx-auto font-sans">
+  <div class="min-h-screen bg-surface-primary text-text-primary px-6 py-12 max-w-content mx-auto font-sans">
     <!-- Back -->
-    <NuxtLink to="/" class="text-sm text-gray-500 hover:text-white transition-colors duration-150">
-      ← Back to home
+    <NuxtLink to="/" class="text-sm text-text-muted hover:text-brand transition-colors duration-150">
+      &larr; {{ t('backToHome') }}
     </NuxtLink>
 
     <!-- Title -->
-    <h1 class="text-4xl font-bold mt-6 mb-8 text-white">
-      📚 Articles
+    <h1 class="text-4xl font-bold mt-6 mb-8 text-text-primary">
+      {{ t('articles') }}
     </h1>
 
     <!-- List -->
-    <div class="divide-y divide-gray-800 border border-gray-800 rounded-md overflow-hidden">
-      <NuxtLink
+    <div class="divide-y divide-border-subtle border border-border-subtle rounded-[10px] overflow-hidden">
+      <a
         v-for="(article, index) in articles"
         :key="index"
-        :to="`/articles/${article.slug}`"
-        class="flex justify-between items-center px-6 py-4 hover:bg-white/5 transition duration-200"
+        :href="article.url"
+        class="flex justify-between items-center px-6 py-4 hover:bg-surface-tertiary transition-all duration-150"
       >
-        <div class="text-lg font-medium text-white">
+        <div class="text-[16px] font-bold text-text-primary">
           {{ article.title }}
         </div>
-        <div class="text-sm text-gray-400 whitespace-nowrap">{{ article.date }}</div>
-      </NuxtLink>
+        <div class="text-[13px] text-text-muted whitespace-nowrap ml-4">{{ article.date }}</div>
+      </a>
     </div>
 
     <!-- Footer -->
-    <div class="mt-6 text-center text-gray-500 text-sm">
-      More articles coming soon...
+    <div class="mt-6 text-center text-text-muted text-sm">
+      {{ t('moreArticles') }}
     </div>
   </div>
 </template>

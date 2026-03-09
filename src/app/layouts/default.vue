@@ -1,13 +1,12 @@
 <!-- layouts/default.vue -->
 <template>
-  <div class="bg-black text-white font-sans min-h-screen">
-    <NuxtPage />
+  <div class="bg-surface-primary text-text-primary font-sans min-h-screen">
+    <Navbar />
+    <div class="pt-20">
+      <NuxtPage />
+    </div>
   </div>
 </template>
-
-<script setup>
-// no script needed for now
-</script>
 
 <style>
 html,
@@ -15,7 +14,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #000;
-  color: #fff;
+  background-color: #0f1117;
+  color: #f0f0f0;
 }
 </style>
