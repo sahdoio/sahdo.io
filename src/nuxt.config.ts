@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    youtubeApiKey: process.env.YOUTUBE_API_KEY || '',
     public: {
       hashnodeHost: process.env.HASHNODE_PUBLICATION_HOST || 'sahdo.io'
     }
